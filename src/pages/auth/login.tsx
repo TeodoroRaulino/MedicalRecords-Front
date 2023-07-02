@@ -5,6 +5,7 @@ import { FaRegEnvelope, FaLock, FaLockOpen } from "react-icons/fa";
 import * as yup from "yup";
 import API from "@/services/api";
 import { TOKEN_STORAGE_KEY } from "@/utils/constants";
+import { userStore } from "@/store/user";
 
 type LoginForm = {
   email: string;
@@ -12,6 +13,8 @@ type LoginForm = {
 };
 
 export default function Login() {
+  const setProfile = userStore((state) => state.setProfile);
+
   const [showPassword, setShowPassword] = useState(false);
 
   const validationSchema = yup.object().shape({
@@ -34,6 +37,13 @@ export default function Login() {
 
     if (response?.status === 200) {
       localStorage.setItem(TOKEN_STORAGE_KEY, data?.token);
+
+      const { name, role } = data?.user;
+
+      setProfile({
+        name,
+        role,
+      });
     }
   }
 
@@ -48,12 +58,12 @@ export default function Login() {
             }}
           ></div>
           <div className="flex flex-col p-8 justify-center w-full bg-white lg:w-1/3">
-            <h1 className="mb-4 text-xl font-semibold text-gray-700 text-center">
+            <h1 className="mb-4 py-10 text-6xl font-semibold text-gray-700 text-center">
               Login
             </h1>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex flex-col mb-4">
-                <label className="mb-2 font-semibold text-gray-600 text-sm">
+                <label className="mb-2 ml-2 font-semibold text-gray-600 text-sm">
                   Email
                 </label>
                 <div className="flex relative">
@@ -62,7 +72,7 @@ export default function Login() {
                   </span>
                   <input
                     type="email"
-                    className="h-10 w-full border-gray-300 border rounded-l pl-10 text-gray-600"
+                    className="h-10 w-full border-gray-300 border rounded-full pl-10 text-gray-600"
                     placeholder="
                     Email"
                     {...register("email")}
@@ -70,7 +80,7 @@ export default function Login() {
                 </div>
               </div>
               <div className="flex flex-col mb-6">
-                <label className="mb-2 font-semibold text-gray-600 text-sm">
+                <label className="mb-2 ml-2 font-semibold text-gray-600 text-sm">
                   Password
                 </label>
                 <div className="flex relative">
@@ -84,20 +94,20 @@ export default function Login() {
                   </div>
                   <input
                     type={showPassword ? "text" : "password"}
-                    className="h-10 w-full border-gray-300 border rounded-l pl-10 text-gray-600"
+                    className="h-10 w-full border-gray-300 border rounded-full pl-10 text-gray-600"
                     placeholder="Password"
                     {...register("password")}
                   />
                 </div>
               </div>
-              <div className="flex items-center mb-6">
+              <div className="flex flex-col mb-6">
                 <button
-                  className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+                  className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full"
                   type="submit"
                 >
                   Login
                 </button>
-                <div className="ml-auto">
+                <div className="ml-auto py-2">
                   <a
                     className="inline-block text-sm text-gray-500 align-baseline hover:text-gray-800"
                     href="#"
