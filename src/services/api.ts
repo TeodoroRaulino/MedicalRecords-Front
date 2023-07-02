@@ -1,12 +1,19 @@
 import axios from "axios";
-
-const API_URL = "https://localhost:44354";
+import { API_URL } from "../utils/constants";
 
 const API = axios.create({
   baseURL: API_URL,
   headers: {
     "Content-Type": "application/json",
   },
+});
+
+API.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
 });
 
 export default API;
