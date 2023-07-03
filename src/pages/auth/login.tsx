@@ -7,6 +7,7 @@ import API from "@/services/api";
 import { DASHBOARD_URL, TOKEN_STORAGE_KEY } from "@/utils/constants";
 import { userStore } from "@/store/user";
 import Router from "next/router";
+import { toast } from "react-toastify";
 
 type LoginForm = {
   email: string;
@@ -23,14 +24,14 @@ export default function Login() {
     password: yup.string().required(),
   });
 
-  const { register, handleSubmit, formState } = useForm<LoginForm>({
+  const { register, handleSubmit } = useForm<LoginForm>({
     resolver: yupResolver(validationSchema),
   });
 
   async function onSubmit(formValues: LoginForm) {
     const response = await API.post("/Auth/login", { ...formValues }).catch(
       (err) => {
-        console.error(err);
+        toast.error(err.response.data);
       }
     );
 
