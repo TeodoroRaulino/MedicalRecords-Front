@@ -4,8 +4,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { FaRegEnvelope, FaLock, FaLockOpen } from "react-icons/fa";
 import * as yup from "yup";
 import API from "@/services/api";
-import { TOKEN_STORAGE_KEY } from "@/utils/constants";
+import { DASHBOARD_URL, TOKEN_STORAGE_KEY } from "@/utils/constants";
 import { userStore } from "@/store/user";
+import Router from "next/router";
 
 type LoginForm = {
   email: string;
@@ -44,6 +45,8 @@ export default function Login() {
         name,
         role,
       });
+
+      Router.push(DASHBOARD_URL);
     }
   }
 
