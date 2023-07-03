@@ -1,6 +1,7 @@
+import { protectedRoute } from "@/components/ProtectedRoute";
 import { userStore } from "@/store/user";
 import MenuItem from "@/types/MenuItem";
-import { ADMIN_ROLE, DASHBOARD_URL, DOCTOR_ROLE } from "@/utils/constants";
+import { DASHBOARD_URL, DOCTOR_ROLE, LOGOUT_URL } from "@/utils/constants";
 import roles from "@/utils/roles";
 import { NextPage } from "next";
 import Image from "next/image";
@@ -98,14 +99,16 @@ export function Dashboard(Page: any) {
                 </span>
               </div>
               <div className="flex items-center">
-                <span className="flex items-center justify-center h-full w-10 text-red-600">
-                  <FaSignOutAlt />
-                </span>
-                <span className="text-lg font-bold text-red-600">Sair</span>
+                <Link href={LOGOUT_URL} className="flex items-center">
+                  <span className="flex items-center justify-center h-full w-10 text-red-600">
+                    <FaSignOutAlt />
+                  </span>
+                  <span className="text-lg font-bold text-red-600">Sair</span>
+                </Link>
               </div>
             </header>
             <main className="flex-1 overflow-x-hidden overflow-y-auto">
-              <div className="container bg-white">
+              <div className="w-full bg-white">
                 <Page />
               </div>
             </main>
@@ -115,5 +118,5 @@ export function Dashboard(Page: any) {
     );
   };
 
-  return Dashboard;
+  return protectedRoute(Dashboard);
 }

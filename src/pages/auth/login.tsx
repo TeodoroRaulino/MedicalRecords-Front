@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FaRegEnvelope, FaLock, FaLockOpen } from "react-icons/fa";
@@ -8,6 +8,7 @@ import { DASHBOARD_URL, TOKEN_STORAGE_KEY } from "@/utils/constants";
 import { userStore } from "@/store/user";
 import Router from "next/router";
 import { toast } from "react-toastify";
+import { AuthToken } from "@/services/authToken";
 
 type LoginForm = {
   email: string;
@@ -50,6 +51,10 @@ export default function Login() {
       Router.push(DASHBOARD_URL);
     }
   }
+
+  useEffect(() => {
+    AuthToken.checkTokenLogin();
+  }, []);
 
   return (
     <>

@@ -3,7 +3,10 @@ export const API_URL =
 
 export const TOKEN_STORAGE_KEY = "token";
 
+export const LOGIN_URL = "/auth/login";
+
 export const DASHBOARD_URL = "/dashboard";
+export const LOGOUT_URL = "/dashboard/logout";
 
 export const USER_URL = `${DASHBOARD_URL}/user`;
 export const CREATE_USER_URL = `${USER_URL}/create`;
