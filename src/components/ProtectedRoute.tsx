@@ -15,7 +15,7 @@ export function protectedRoute(Page: any) {
         toast.error("Você precisar estar logado ou seu token expirou!");
         router.push(LOGIN_URL);
       }
-    }, []);
+    }, [router, token]);
 
     return <Page />;
   };

@@ -38,7 +38,7 @@ export function Dashboard(Page: any) {
       const menu = renderMenuItems();
 
       setMenu(menu);
-    }, []);
+    }, [user.role]);
 
     function renderMenu(item: MenuItem) {
       return MenuItemIsActived(item) ? (
