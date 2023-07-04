@@ -3,6 +3,7 @@ import { Dashboard } from "@/layout/dashboard";
 import API from "@/services/api";
 import { User } from "@/types/User";
 import { NextPage } from "next";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -35,8 +36,13 @@ const Index: NextPage = () => {
   return (
     <>
       <div className="w-full h-screen p-10 bg-white">
-        <div className="flex">
+        <div className="flex justify-between">
           <h1 className="text-6xl text-gray-500 font-bold">Users</h1>
+          <Link href="/dashboard/users/create">
+            <button className="flex items-center justify-center w-32 h-12 bg-green-600 text-white rounded-md">
+              Criar
+            </button>
+          </Link>
         </div>
         <div className="flex flex-col mt-10">
           <div className="bg-white divide-y divide-gray-200">

@@ -29,7 +29,7 @@ export default function Users({ user }: UserProps) {
         <p className="text-gray-500">{user.email}</p>
       </div>
       <div className="px-6 py-3 w-1/4">
-        <p className="text-gray-500">{roles[user.role]}</p>
+        <p className="text-gray-500 capitalize">{roles[user.role]}</p>
       </div>
       <div className="px-6 py-3 w-1/4">
         <div className="flex flex-row items-center justify-start">
