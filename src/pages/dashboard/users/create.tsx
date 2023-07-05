@@ -22,7 +22,7 @@ const Create: NextPage = () => {
     }
   }
 
-  return <Form onSubmit={onSubmit} />;
+  return <Form onCreate={onSubmit} />;
 };
 
 export default Dashboard(Create);

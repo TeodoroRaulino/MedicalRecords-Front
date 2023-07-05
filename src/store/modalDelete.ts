@@ -45,7 +45,10 @@ export const useModalDeleteStore = create<State>((set, get) => ({
       set({
         response: response,
       });
+      //window.location.reload();
+
       toast.success("Registro excluído com sucesso!");
+
       set({ isOpen: false });
     } catch (error) {
       toast.error("Erro ao excluir registro!");

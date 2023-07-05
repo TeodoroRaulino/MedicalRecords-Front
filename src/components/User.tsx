@@ -33,17 +33,17 @@ export default function Users({ user }: UserProps) {
       </div>
       <div className="px-6 py-3 w-1/4">
         <div className="flex flex-row items-center justify-start">
+          <Link href={`${EDIT_USER_URL}/${user.id}`}>
+            <span className="flex items-center justify-center h-full w-10 text-gray-800">
+              <FaEdit />
+            </span>
+          </Link>
           <button
             onClick={handleDeleteUser}
             className="flex items-center justify-center h-full w-10 text-red-600"
           >
             <FaTrash />
           </button>
-          <Link href={`${EDIT_USER_URL}/${user.id}`}>
-            <span className="flex items-center justify-center h-full w-10 text-gray-800">
-              <FaEdit />
-            </span>
-          </Link>
         </div>
       </div>
       <ModalDelete />

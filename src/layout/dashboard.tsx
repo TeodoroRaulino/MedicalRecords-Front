@@ -118,5 +118,9 @@ export function Dashboard(Page: any) {
     );
   };
 
+  Dashboard.getInitialProps = async (ctx: any) => {
+    return Page.getInitialProps ? Page.getInitialProps(ctx) : {};
+  };
+
   return protectedRoute(Dashboard);
 }

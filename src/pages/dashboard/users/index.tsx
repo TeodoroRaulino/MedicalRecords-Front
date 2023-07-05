@@ -35,7 +35,7 @@ const Index: NextPage = () => {
 
   return (
     <>
-      <div className="w-full h-screen p-10 bg-white">
+      <div className="w-full p-10 bg-white">
         <div className="flex justify-between">
           <h1 className="text-6xl text-gray-500 font-bold">Users</h1>
           <Link href="/dashboard/users/create">
