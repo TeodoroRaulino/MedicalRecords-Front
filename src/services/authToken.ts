@@ -39,16 +39,21 @@ export class AuthToken {
   }
 
   static fromStorage(): AuthToken | null {
-    if (typeof window === "undefined") {
-      return null;
-    }
-
-    const token = localStorage.getItem(TOKEN_STORAGE_KEY);
+    const token =
+      typeof window !== "undefined"
+        ? localStorage.getItem(TOKEN_STORAGE_KEY)
+        : null;
     if (!token) {
       return null;
     }
 
-    return new AuthToken(token);
+    const authToken = new AuthToken(token);
+    if (authToken.isExpired) {
+      localStorage.removeItem(TOKEN_STORAGE_KEY); // Remover token expirado do armazenamento
+      return null;
+    }
+
+    return authToken;
   }
 
   static checkTokenLogin() {

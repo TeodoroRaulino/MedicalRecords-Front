@@ -38,7 +38,7 @@ export function Dashboard(Page: any) {
       const menu = renderMenuItems();
 
       setMenu(menu);
-    }, []);
+    }, [user.role]);
 
     function renderMenu(item: MenuItem) {
       return MenuItemIsActived(item) ? (
@@ -116,6 +116,10 @@ export function Dashboard(Page: any) {
         </div>
       </>
     );
+  };
+
+  Dashboard.getInitialProps = async (ctx: any) => {
+    return Page.getInitialProps ? Page.getInitialProps(ctx) : {};
   };
 
   return protectedRoute(Dashboard);
