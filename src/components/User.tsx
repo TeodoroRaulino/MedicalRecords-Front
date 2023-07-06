@@ -1,10 +1,16 @@
 import { useModalDeleteStore } from "@/store/modalDelete";
 import { User } from "@/types/User";
-import { EDIT_USER_URL } from "@/utils/constants";
+import {
+  CREATE_MEDICAL_RECORD_URL,
+  EDIT_USER_URL,
+  PATIENT_ROLE,
+} from "@/utils/constants";
 import roles from "@/utils/roles";
 import Link from "next/link";
-import { FaTrash, FaEdit } from "react-icons/fa";
+import { FaTrash, FaEdit, FaClipboardList } from "react-icons/fa";
 import ModalDelete from "./ModalDelete";
+import { useEffect, useState } from "react";
+import API from "@/services/api";
 
 type UserProps = {
   user: User;
@@ -13,12 +19,38 @@ type UserProps = {
 export default function Users({ user }: UserProps) {
   const { openModal } = useModalDeleteStore();
 
+  const [existesMedicalRecord, setExistesMedicalRecord] = useState(false);
+
+  const [loading, setLoading] = useState(true);
+
   const handleDeleteUser = () => {
     openModal(
       `/users/${user.id}`,
       `Você tem certeza que quer deletar o usuário ${user.name}?`
     );
   };
+
+  useEffect(() => {
+    async function loadMedicalRecord() {
+      try {
+        setLoading(true);
+        const response = await API.get(
+          `/medical-records/user/${user.id}`
+        ).finally(() => {
+          setLoading(false);
+        });
+        if (response?.status === 200) {
+          setExistesMedicalRecord(true);
+        }
+      } catch (error) {
+        setExistesMedicalRecord(false);
+      }
+    }
+
+    if (user && user.id && roles[user.role] === PATIENT_ROLE) {
+      loadMedicalRecord();
+    }
+  }, [user]);
 
   return (
     <>
@@ -44,6 +76,14 @@ export default function Users({ user }: UserProps) {
           >
             <FaTrash />
           </button>
+          {existesMedicalRecord === false &&
+            roles[user.role] === PATIENT_ROLE && (
+              <Link href={CREATE_MEDICAL_RECORD_URL + `?patientId=${user.id}`}>
+                <span className="flex items-center justify-center h-full w-10 text-gray-800">
+                  {loading ? null : <FaClipboardList />}
+                </span>
+              </Link>
+            )}
         </div>
       </div>
       <ModalDelete />
