@@ -7,13 +7,13 @@ type State = {
   close: () => void;
 };
 
-const INITIAL_STATE = {
+const initialState = {
   isOpen: false,
   id: undefined,
 };
 
 export const useMoreInfoStore = create<State>((set, get) => ({
-  ...INITIAL_STATE,
-  close: () => set(() => INITIAL_STATE),
+  ...initialState,
+  close: () => set(() => initialState),
   openAndSetId: (id) => set(() => ({ isOpen: true, id })),
 }));
