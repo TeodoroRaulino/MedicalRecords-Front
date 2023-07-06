@@ -12,6 +12,10 @@ export const USER_URL = `${DASHBOARD_URL}/users`;
 export const CREATE_USER_URL = `${USER_URL}/create`;
 export const EDIT_USER_URL = `${USER_URL}/edit`;
 
+export const MEDICAL_RECORD_URL = `${DASHBOARD_URL}/medical-records`;
+export const CREATE_MEDICAL_RECORD_URL = `${MEDICAL_RECORD_URL}/create`;
+export const EDIT_MEDICAL_RECORD_URL = `${MEDICAL_RECORD_URL}/edit`;
+
 export const ADMIN_ROLE = "admin";
 export const DOCTOR_ROLE = "doctor";
 export const PATIENT_ROLE = "patient";

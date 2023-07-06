@@ -1,14 +1,26 @@
 import { protectedRoute } from "@/components/ProtectedRoute";
 import { userStore } from "@/store/user";
 import MenuItem from "@/types/MenuItem";
-import { DASHBOARD_URL, DOCTOR_ROLE, LOGOUT_URL } from "@/utils/constants";
+import {
+  DASHBOARD_URL,
+  DOCTOR_ROLE,
+  LOGOUT_URL,
+  MEDICAL_RECORD_URL,
+  USER_URL,
+} from "@/utils/constants";
 import roles from "@/utils/roles";
 import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import router from "next/router";
 import { useEffect, useState } from "react";
-import { FaHome, FaSignOutAlt, FaUserFriends, FaBars } from "react-icons/fa";
+import {
+  FaHome,
+  FaSignOutAlt,
+  FaUserFriends,
+  FaBars,
+  FaClipboardList,
+} from "react-icons/fa";
 
 export function Dashboard(Page: any) {
   const Dashboard: NextPage = () => {
@@ -29,10 +41,19 @@ export function Dashboard(Page: any) {
         if (roles[user.role] === DOCTOR_ROLE) {
           items.push({
             name: "Usuários",
-            url: "/dashboard/users",
+            url: USER_URL,
             icon: <FaUserFriends />,
           });
         }
+
+        if (roles[user.role] === DOCTOR_ROLE) {
+          items.push({
+            name: "Prontuários",
+            url: MEDICAL_RECORD_URL,
+            icon: <FaClipboardList />,
+          });
+        }
+
         return items;
       }
       const menu = renderMenuItems();
@@ -45,12 +66,12 @@ export function Dashboard(Page: any) {
         <Link
           key={item.name}
           href={item.url}
-          className="flex flex-row items-center justify-start py-2"
+          className="flex flex-row items-center justify-start py-2 bg-gray-500 rounded-lg ml-2"
         >
-          <span className="flex items-center justify-center h-full w-10 text-gray-400">
+          <span className="flex items-center justify-center h-full w-10 text-white">
             {item.icon}
           </span>
-          <span className="text-lg font-normal">{item.name}</span>
+          <span className="text-lg font-bold">{item.name}</span>
         </Link>
       ) : (
         <Link
@@ -61,7 +82,7 @@ export function Dashboard(Page: any) {
           <span className="flex items-center justify-center h-full w-10 text-gray-400">
             {item.icon}
           </span>
-          <span className="text-lg font-normal text-left">{item.name}</span>
+          <span className="text-lg font-bold text-left">{item.name}</span>
         </Link>
       );
     }
