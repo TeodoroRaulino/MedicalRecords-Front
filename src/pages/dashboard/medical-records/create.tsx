@@ -11,21 +11,23 @@ const Create: NextPage = () => {
   const router = useRouter();
 
   async function onSubmit(formValues: MedicalRecordProps) {
-    const { patientId } = router.query;
+    const { userId } = router.query;
 
-    formValues.userId = parseInt(patientId as string, 10);
+    const formData = new FormData();
 
-    const response = await API.post(
-      "/medical-records",
-      {
-        ...formValues,
+    formData.append("fullName", formValues.fullName);
+    formData.append("cpf", formValues.cpf);
+    formData.append("phoneNumber", formValues.phoneNumber);
+    formData.append("photo", formValues.photo);
+    formData.append("photoPath", formValues.photoPath);
+    formData.append("userId", userId as string);
+    formData.append("address", JSON.stringify(formValues.address));
+
+    const response = await API.post("/medical-records", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
       },
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    ).catch((err) => {
+    }).catch((err) => {
       toast.error(err.message);
     });
 

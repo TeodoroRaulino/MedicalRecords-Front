@@ -78,7 +78,7 @@ export default function Users({ user }: UserProps) {
           </button>
           {existesMedicalRecord === false &&
             roles[user.role] === PATIENT_ROLE && (
-              <Link href={CREATE_MEDICAL_RECORD_URL + `?patientId=${user.id}`}>
+              <Link href={CREATE_MEDICAL_RECORD_URL + `?userId=${user.id}`}>
                 <span className="flex items-center justify-center h-full w-10 text-gray-800">
                   {loading ? null : <FaClipboardList />}
                 </span>
