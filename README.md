@@ -12,21 +12,19 @@ A aplicação de Ficha Médica tem como objetivo fornecer uma plataforma para pa
 
 ## Uso
 
-Para usar a aplicação de Ficha Médica, siga estas etapas:
+### Usuário do tipo Médico
+- Acesso à aplicação para controle completo do CRUD de usuários e fichas médicas.
+- Interface intuitiva e de fácil utilização para o controle de usuários.
+- Para criar uma ficha médica, ao acessar a lista de usuários, os do tipo 'paciente' terão uma opção em ações para criar a ficha médica para ele.
+- Acesso às fichas médicas, permitindo a visualização de informações resumidas.
+- Opções no menu da ficha médica, permitindo:
+  - Visualização completa das informações.
+  - Edição das informações.
+  - Exclusão da ficha médica.
 
-- Médico
-
-1. Faça login na aplicação com suas credenciais.
-2. Na página principal, você verá todas as suas fichas médicas disponíveis.
-3. Clique em uma ficha médica para visualizar os detalhes.
-4. Para adicionar uma nova ficha médica, clique no botão "Adicionar Ficha Médica".
-5. Preencha o formulário com as informações necessárias e clique em "Salvar".
-6. Você pode editar ou excluir uma ficha médica existente usando os botões correspondentes.
-
-- Paciente
-
-1. Faça login na aplicação com suas credenciais.
-2. Na página principal, você verá sua ficha médica.
+### Usuário do tipo Paciente
+- Possibilidade de fazer login na aplicação.
+- Acesso somente à visualização da sua própria ficha médica.
 
 ## Backend
 
