@@ -21,10 +21,11 @@ const initialState = {
 
 export const userStore = create<State>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       ...initialState,
       setProfile: (payload) => {
-        set({ user: payload });
+        const state = get();
+        set({ ...state, user: payload });
       },
     }),
     {
