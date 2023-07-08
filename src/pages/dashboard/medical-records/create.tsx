@@ -13,12 +13,14 @@ const Create: NextPage = () => {
   async function onSubmit(formValues: MedicalRecordProps) {
     const { userId } = router.query;
 
+    const [photo] = formValues.photo;
+
     const formData = new FormData();
 
     formData.append("fullName", formValues.fullName);
     formData.append("cpf", formValues.cpf);
     formData.append("phoneNumber", formValues.phoneNumber);
-    formData.append("photo", formValues.photo);
+    formData.append("photo", new Blob([photo], { type: "image/jpeg" }));
     formData.append("photoPath", formValues.photoPath);
     formData.append("userId", userId as string);
     formData.append("address", JSON.stringify(formValues.address));
@@ -32,7 +34,6 @@ const Create: NextPage = () => {
     });
 
     const data = response?.data;
-    console.log(response);
 
     if (response?.status === 201) {
       router.push(MEDICAL_RECORD_URL);

@@ -3,7 +3,7 @@ export type MedicalRecordProps = {
   fullName: string;
   cpf: string;
   phoneNumber: string;
-  photo: File;
+  photo: File[];
   photoPath: string;
   address?: Address;
   userId?: number;
