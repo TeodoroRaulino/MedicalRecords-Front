@@ -7,6 +7,8 @@ import {
   DOCTOR_ROLE,
   LOGOUT_URL,
   MEDICAL_RECORD_URL,
+  MY_MEDICAL_RECORD_URL,
+  PATIENT_ROLE,
   USER_URL,
 } from "@/utils/constants";
 import roles from "@/utils/roles";
@@ -53,6 +55,14 @@ export function Dashboard(Page: any) {
           items.push({
             name: "Prontuários",
             url: MEDICAL_RECORD_URL,
+            icon: <FaClipboardList />,
+          });
+        }
+
+        if (roles[user.role] === PATIENT_ROLE) {
+          items.push({
+            name: "Prontuário",
+            url: MY_MEDICAL_RECORD_URL,
             icon: <FaClipboardList />,
           });
         }
