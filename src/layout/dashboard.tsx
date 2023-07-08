@@ -22,7 +22,7 @@ import {
   FaSignOutAlt,
   FaUserFriends,
   FaBars,
-  FaClipboardList,
+  FaNotesMedical,
 } from "react-icons/fa";
 
 export function Dashboard(Page: any) {
@@ -55,7 +55,7 @@ export function Dashboard(Page: any) {
           items.push({
             name: "Prontuários",
             url: MEDICAL_RECORD_URL,
-            icon: <FaClipboardList />,
+            icon: <FaNotesMedical />,
           });
         }
 
@@ -63,7 +63,7 @@ export function Dashboard(Page: any) {
           items.push({
             name: "Prontuário",
             url: MY_MEDICAL_RECORD_URL,
-            icon: <FaClipboardList />,
+            icon: <FaNotesMedical />,
           });
         }
 

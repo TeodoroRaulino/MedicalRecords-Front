@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FaRegEnvelope, FaLock, FaLockOpen } from "react-icons/fa";
+import { FaRegEnvelope, FaLock, FaLockOpen, FaSpinner } from "react-icons/fa";
 import * as yup from "yup";
 import API from "@/services/api";
 import { DASHBOARD_URL, TOKEN_STORAGE_KEY } from "@/utils/constants";
@@ -18,6 +18,8 @@ type LoginForm = {
 export default function Login() {
   const setProfile = userStore((state) => state.setProfile);
 
+  const [loading, setLoading] = useState(false);
+
   const [showPassword, setShowPassword] = useState(false);
 
   const validationSchema = yup.object().shape({
@@ -30,11 +32,15 @@ export default function Login() {
   });
 
   async function onSubmit(formValues: LoginForm) {
-    const response = await API.post("/Auth/login", { ...formValues }).catch(
-      (err) => {
+    setLoading(true);
+
+    const response = await API.post("/Auth/login", { ...formValues })
+      .catch((err) => {
         toast.error(err.response.data);
-      }
-    );
+      })
+      .finally(() => {
+        setLoading(false);
+      });
 
     const data = response?.data;
 
@@ -114,7 +120,15 @@ export default function Login() {
                   className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full"
                   type="submit"
                 >
-                  Login
+                  {loading ? (
+                    <span className="flex items-center justify-center">
+                      <FaSpinner className="mr-2 animate-spin" />
+                    </span>
+                  ) : (
+                    <span className="flex items-center justify-center">
+                      Entrar
+                    </span>
+                  )}
                 </button>
                 <div className="ml-auto py-2">
                   <a
