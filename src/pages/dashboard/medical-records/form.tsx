@@ -21,7 +21,7 @@ type MedicalRecordFormValues = {
   fullName: string;
   cpf: string;
   phoneNumber: string;
-  photo: File;
+  photo: File[];
   photoPath: string;
   address?: Address;
 };
@@ -138,7 +138,11 @@ const Form = ({ onCreate, onEdit, data }: Props) => {
             Editar Prontuário
           </h1>
         )}
-        <form onSubmit={handleSubmit(handleFormSubmit)} className="text-black">
+        <form
+          onSubmit={handleSubmit(handleFormSubmit)}
+          className="text-black"
+          encType="multipart/form-data"
+        >
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col">
               <label className="text-gray-800 font-bold" htmlFor="fullName">
