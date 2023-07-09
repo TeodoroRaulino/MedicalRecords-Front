@@ -1,6 +1,6 @@
 import { Resolver, useForm } from "react-hook-form";
 import * as yup from "yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Address, MedicalRecordProps } from "@/types/MedicalRecord";
 import Button from "@/components/Button";
 import {
@@ -32,6 +32,8 @@ const Form = ({ onCreate, onEdit, data }: Props) => {
   const isEditing = Boolean(data);
 
   const [loading, setLoading] = useState(false);
+
+  const [imageSrc, setImageSrc] = useState<string | null>(null);
 
   const validationSchema = yup.object().shape({
     fullName: yup
@@ -128,6 +130,14 @@ const Form = ({ onCreate, onEdit, data }: Props) => {
     setLoading(false);
   };
 
+  useEffect(() => {
+    if (data?.photo) {
+      const blob = "data:image/jpeg;base64," + data.photo;
+
+      setImageSrc(blob);
+    }
+  }, [data?.photo]);
+
   return (
     <>
       <div className="w-full p-10 bg-white">
@@ -205,7 +215,16 @@ const Form = ({ onCreate, onEdit, data }: Props) => {
               {errors.photoPath && (
                 <span className="text-red-500">{errors.photoPath.message}</span>
               )}
-              <input type="file" className="my-2" {...register("photo")} />
+              <div className="flex flex-row items-center justify-start">
+                {isEditing && imageSrc && (
+                  <img
+                    className="w-20 h-20 rounded-full object-cover mt-2 mr-3"
+                    src={imageSrc}
+                    alt="Foto do paciente"
+                  />
+                )}
+                <input type="file" className="my-2" {...register("photo")} />
+              </div>
             </div>
           </div>
 

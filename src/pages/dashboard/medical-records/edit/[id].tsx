@@ -9,32 +9,51 @@ import Form from "../form";
 import { MedicalRecordProps } from "@/types/MedicalRecord";
 
 const Edit: NextPage = () => {
-  const [data, setData] = useState<MedicalRecordProps>(
+  const [medicalRecord, setMedicalRecord] = useState<MedicalRecordProps>(
     {} as MedicalRecordProps
   );
 
   const router = useRouter();
 
   async function onSubmit(formValues: MedicalRecordProps) {
-    const response = await API.put(`/medical-records/${router.query.id}`, {
-      ...formValues,
-    }).catch((err) => {
+    const [photo] = formValues.photo;
+
+    const formData = new FormData();
+
+    formData.append("fullName", formValues.fullName);
+    formData.append("cpf", formValues.cpf);
+    formData.append("phoneNumber", formValues.phoneNumber);
+    if (photo !== undefined) {
+      console.log("entrou");
+      formData.append("photo", new Blob([photo], { type: "image/jpeg" }));
+    }
+    formData.append("photoPath", formValues.photoPath);
+    formData.append("userId", medicalRecord.userId?.toString() as string);
+    formData.append("address", JSON.stringify(formValues.address));
+
+    const response = await API.put(
+      `/medical-records/${router.query.id}`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    ).catch((err) => {
       toast.error(err.message);
     });
 
-    const data = response?.data;
-
-    if (response?.status === 200) {
+    if (response?.status === 204) {
       router.push(MEDICAL_RECORD_URL);
 
-      toast.success(data);
+      toast.success("Usuário atualizado com sucesso!");
     }
   }
 
   useEffect(() => {
     async function LoadMedicalRecord() {
       if (!router.query.id) {
-        setData({} as MedicalRecordProps);
+        setMedicalRecord({} as MedicalRecordProps);
         return;
       }
 
@@ -47,9 +66,10 @@ const Edit: NextPage = () => {
       const data = response?.data;
 
       if (response?.status === 200) {
-        setData(data);
+        console.log(data.photo);
+        setMedicalRecord(data);
       } else {
-        setData({} as MedicalRecordProps);
+        setMedicalRecord({} as MedicalRecordProps);
       }
     }
 
@@ -58,7 +78,7 @@ const Edit: NextPage = () => {
     }
   }, [router.query.id]);
 
-  if (!data.phoneNumber) {
+  if (!medicalRecord.phoneNumber) {
     return (
       <div className="flex justify-center items-center h-screen">
         <button
@@ -89,7 +109,7 @@ const Edit: NextPage = () => {
     );
   }
 
-  return <Form onEdit={onSubmit} data={data} />;
+  return <Form onEdit={onSubmit} data={medicalRecord} />;
 };
 
 export default Dashboard(Edit);
