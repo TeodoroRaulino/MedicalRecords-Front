@@ -15,6 +15,8 @@ const Index: NextPage = () => {
 
   const userRole = userStore((state) => state.user.role);
 
+  const [role, setRole] = useState("");
+
   const [name, setName] = useState("");
 
   const [InfoDashboard, setInfoDashboard] = useState<InfoDashboardProps | null>(
@@ -27,8 +29,11 @@ const Index: NextPage = () => {
     if (typeof window !== "undefined") {
       const name = userName?.split(" ")[0];
       setName(name);
+
+      const role = userRole;
+      setRole(role);
     }
-  }, [userName]);
+  }, [userName, userRole]);
 
   useEffect(() => {
     async function LoadInfoDashboard() {
@@ -60,7 +65,7 @@ const Index: NextPage = () => {
           </span>
         </div>
 
-        {roles[userRole] === DOCTOR_ROLE ? (
+        {roles[role] === DOCTOR_ROLE ? (
           <div className="flex items-center justify-center text-teal-300">
             {isLoading ? (
               <SkeletonDashboard />
