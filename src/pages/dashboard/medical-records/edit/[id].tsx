@@ -24,7 +24,6 @@ const Edit: NextPage = () => {
     formData.append("cpf", formValues.cpf);
     formData.append("phoneNumber", formValues.phoneNumber);
     if (photo !== undefined) {
-      console.log("entrou");
       formData.append("photo", new Blob([photo], { type: "image/jpeg" }));
     }
     formData.append("photoPath", formValues.photoPath);
@@ -66,7 +65,6 @@ const Edit: NextPage = () => {
       const data = response?.data;
 
       if (response?.status === 200) {
-        console.log(data.photo);
         setMedicalRecord(data);
       } else {
         setMedicalRecord({} as MedicalRecordProps);

@@ -2,7 +2,6 @@ import { Dashboard } from "@/layout/dashboard";
 import API from "@/services/api";
 import { MedicalRecordProps } from "@/types/MedicalRecord";
 import { NextPage } from "next";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -61,7 +60,7 @@ const Index: NextPage = () => {
                   <img
                     src={imageSrc}
                     alt="Foto"
-                    className="w-24 h-auto rounded-full object-cover"
+                    className="w-32 h-32 rounded-full object-cover"
                   />
                 ) : (
                   <img

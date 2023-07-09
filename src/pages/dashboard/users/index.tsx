@@ -10,6 +10,19 @@ import { toast } from "react-toastify";
 const Index: NextPage = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [filter, setFilter] = useState("");
+
+  const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilter(event.target.value);
+  };
+
+  const filteredUsers = users.filter((user) => {
+    if (filter === "") {
+      return user;
+    } else {
+      return user.role === parseInt(filter);
+    }
+  });
 
   useEffect(() => {
     async function LoadUser() {
@@ -46,6 +59,22 @@ const Index: NextPage = () => {
         </div>
         <div className="flex flex-col mt-10">
           <div className="bg-white divide-y divide-gray-200">
+            <div className="flex justify-end mb-4">
+              <label htmlFor="userTypeFilter" className="mr-2">
+                Tipo de Usuário:
+              </label>
+              <select
+                id="userTypeFilter"
+                value={filter}
+                onChange={handleFilterChange}
+                className="border border-gray-300 rounded-md py-1 px-2 text-black"
+              >
+                <option value="">Todos</option>
+                <option value={0}>Doutor</option>
+                <option value={1}>Paciente</option>
+              </select>
+            </div>
+
             <div className="flex flex-row font-medium text-gray-500 uppercase tracking-wider">
               <div className="px-6 py-3 w-1/4">Name</div>
               <div className="px-6 py-3 w-1/4">Email</div>
@@ -57,7 +86,7 @@ const Index: NextPage = () => {
               <div>carregando...</div>
             ) : (
               <div className="bg-white">
-                {users.map((user: User, index) => (
+                {filteredUsers.map((user: User, index) => (
                   <div
                     key={index}
                     className={`${
