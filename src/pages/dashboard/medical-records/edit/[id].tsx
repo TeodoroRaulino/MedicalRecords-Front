@@ -27,8 +27,12 @@ const Edit: NextPage = () => {
       formData.append("photo", new Blob([photo], { type: "image/jpeg" }));
     }
     formData.append("photoPath", formValues.photoPath);
+    formData.append("street", formValues.street as string);
+    formData.append("neighborhood", formValues.neighborhood as string);
+    formData.append("city", formValues.city as string);
+    formData.append("state", formValues.state as string);
+    formData.append("postalCode", formValues.postalCode as string);
     formData.append("userId", medicalRecord.userId?.toString() as string);
-    formData.append("address", JSON.stringify(formValues.address));
 
     const response = await API.put(
       `/medical-records/${router.query.id}`,

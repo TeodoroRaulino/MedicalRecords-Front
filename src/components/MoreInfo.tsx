@@ -49,55 +49,56 @@ export default function MoreInfo({ medicalRecord }: Props) {
               <div className="p-6 space-y-6 flex flex-col items-center">
                 <ul className="text-left text-white">
                   <li className="py-1">
-                    <span className="font-semibold">Nome:</span>
+                    <span className="font-semibold pr-2">Nome:</span>
                     {medicalRecord.fullName || "--"}
                   </li>
                   <li className="py-1">
-                    <span className="font-semibold">CPF:</span>
+                    <span className="font-semibold pr-2">CPF:</span>
                     {medicalRecord.cpf || "--"}
                   </li>
                   <li className="py-1">
-                    <span className="font-semibold">Telefone:</span>
+                    <span className="font-semibold pr-2">Telefone:</span>
                     {medicalRecord.phoneNumber || "--"}
                   </li>
-                  {medicalRecord.address?.city ? (
+                  {medicalRecord?.street ? (
                     <li className="py-1">
-                      <span className="font-semibold">Cidade:</span>
-                      {medicalRecord.address.city}
+                      <span className="font-semibold pr-2">Rua:</span>
+                      {medicalRecord.street}
                     </li>
                   ) : (
                     <li className="py-1">
-                      <span className="font-semibold">Cidade:</span> {"--"}
+                      <span className="font-semibold pr-2">Rua:</span> {"--"}
                     </li>
                   )}
-                  {medicalRecord.address?.state ? (
+                  {medicalRecord?.city ? (
                     <li className="py-1">
-                      <span className="font-semibold">Estado:</span>
-                      {medicalRecord.address.state}
+                      <span className="font-semibold pr-2">Cidade:</span>
+                      {medicalRecord.city}
                     </li>
                   ) : (
                     <li className="py-1">
-                      <span className="font-semibold">Estado:</span> {"--"}
+                      <span className="font-semibold pr-2">Cidade:</span> {"--"}
                     </li>
                   )}
-                  {medicalRecord.address?.street ? (
+                  {medicalRecord?.state ? (
                     <li className="py-1">
-                      <span className="font-semibold">Rua:</span>
-                      {medicalRecord.address.street}
+                      <span className="font-semibold pr-2">Estado:</span>
+                      {medicalRecord.state}
                     </li>
                   ) : (
                     <li className="py-1">
-                      <span className="font-semibold">Rua:</span> {"--"}
+                      <span className="font-semibold pr-2">Estado:</span> {"--"}
                     </li>
                   )}
-                  {medicalRecord.address?.postalCode ? (
+
+                  {medicalRecord?.postalCode ? (
                     <li className="py-1">
-                      <span className="font-semibold">CEP:</span>
-                      {medicalRecord.address.postalCode}
+                      <span className="font-semibold pr-2">CEP:</span>
+                      {medicalRecord.postalCode}
                     </li>
                   ) : (
                     <li className="py-1">
-                      <span className="font-semibold">CEP:</span> {"--"}
+                      <span className="font-semibold pr-2">CEP:</span> {"--"}
                     </li>
                   )}
                 </ul>

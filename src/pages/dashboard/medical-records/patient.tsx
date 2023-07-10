@@ -96,43 +96,31 @@ const Index: NextPage = () => {
                 <div className="flex flex-row bg-white rounded-lg w-full py-2 px-4">
                   <h1 className="font-bold text-gray-500">Rua:</h1>
                   <h1 className="text-gray-500 pl-3">
-                    {medicalRecord?.address
-                      ? medicalRecord.address.street
-                      : "--"}
+                    {medicalRecord?.street}
                   </h1>
                 </div>
 
                 <div className="flex flex-row bg-white rounded-lg w-full py-2 px-4">
                   <h1 className="font-bold text-gray-500">Bairro</h1>
                   <h1 className="text-gray-500 pl-3">
-                    {medicalRecord?.address
-                      ? medicalRecord.address.neighborhood
-                      : "--"}
+                    {medicalRecord?.neighborhood}
                   </h1>
                 </div>
 
                 <div className="flex flex-row bg-white rounded-lg w-full py-2 px-4">
                   <h1 className="font-bold text-gray-500">Cidade:</h1>
-                  <h1 className="text-gray-500 pl-3">
-                    {medicalRecord?.address ? medicalRecord.address.city : "--"}
-                  </h1>
+                  <h1 className="text-gray-500 pl-3">{medicalRecord?.city}</h1>
                 </div>
 
                 <div className="flex flex-row bg-white rounded-lg w-full py-2 px-4">
                   <h1 className="font-bold text-gray-500">Estado:</h1>
-                  <h1 className="text-gray-500 pl-3">
-                    {medicalRecord?.address
-                      ? medicalRecord.address.state
-                      : "--"}
-                  </h1>
+                  <h1 className="text-gray-500 pl-3">{medicalRecord?.state}</h1>
                 </div>
 
                 <div className="flex flex-row bg-white rounded-lg w-full py-2 px-4">
                   <h1 className="font-bold text-gray-500">CEP:</h1>
                   <h1 className="text-gray-500 pl-3">
-                    {medicalRecord?.address
-                      ? medicalRecord.address.postalCode
-                      : "--"}
+                    {medicalRecord?.postalCode}
                   </h1>
                 </div>
               </div>
