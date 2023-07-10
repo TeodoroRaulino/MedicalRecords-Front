@@ -72,8 +72,11 @@ export default function Login() {
               backgroundImage: "url('/images/login.jpg')",
             }}
           ></div>
-          <div className="flex flex-col p-8 justify-center w-full bg-white lg:w-1/3">
+          <div className="flex flex-col p-8 justify-start w-full bg-white lg:w-1/3">
             <h1 className="mb-4 py-10 text-6xl font-semibold text-gray-700 text-center">
+              Aplicação de Prontuários
+            </h1>
+            <h1 className="mb-4 py-10 text-5xl font-semibold text-gray-700 text-center">
               Login
             </h1>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -130,14 +133,6 @@ export default function Login() {
                     </span>
                   )}
                 </button>
-                <div className="ml-auto py-2">
-                  <a
-                    className="inline-block text-sm text-gray-500 align-baseline hover:text-gray-800"
-                    href="#"
-                  >
-                    Forgot Password?
-                  </a>
-                </div>
               </div>
             </form>
           </div>

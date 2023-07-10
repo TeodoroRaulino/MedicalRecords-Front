@@ -45,9 +45,12 @@ export const useModalDeleteStore = create<State>((set, get) => ({
       set({
         response: response,
       });
-      //window.location.reload();
-
       toast.success("Registro excluído com sucesso!");
+
+      //Todo: Solução temporária para atualizar a página após excluir um registro, pensar em outra forma de fazer isso.
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
 
       set({ isOpen: false });
     } catch (error) {
