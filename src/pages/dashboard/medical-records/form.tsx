@@ -10,11 +10,13 @@ import {
   PHONE_VALIDATION_REGEX,
 } from "@/utils/constants";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { userIdProps } from "./create";
 
 type Props = {
   onCreate?: (formValues: MedicalRecordProps) => Promise<void>;
   onEdit?: (formValues: MedicalRecordProps) => Promise<void>;
   data?: MedicalRecordProps;
+  userData?: userIdProps;
 };
 
 type MedicalRecordFormValues = {
@@ -28,7 +30,7 @@ type MedicalRecordFormValues = {
 
 type ResolverType = Resolver<MedicalRecordFormValues, any>;
 
-const Form = ({ onCreate, onEdit, data }: Props) => {
+const Form = ({ onCreate, onEdit, data, userData }: Props) => {
   const isEditing = Boolean(data);
 
   const [loading, setLoading] = useState(false);
@@ -154,20 +156,24 @@ const Form = ({ onCreate, onEdit, data }: Props) => {
           encType="multipart/form-data"
         >
           <div className="grid grid-cols-2 gap-4">
-            <div className="flex flex-col">
-              <label className="text-gray-800 font-bold" htmlFor="fullName">
+            <div className="flex flex-col relative group">
+              <label
+                className="text-gray-800 font-bold group-hover:opacity-100"
+                htmlFor="fullName"
+              >
                 Nome Completo
               </label>
+              <span className="tooltip absolute top-0 right-0 p-1 bg-gray-800 text-white text-xs rounded opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-100">
+                Nome não pode ser editado!
+              </span>
               <input
-                className="border border-gray-300 p-2 rounded-lg"
+                className="border border-gray-300 p-2 rounded-lg group-hover:opacity-100"
                 type="text"
+                disabled
+                defaultValue={userData?.name}
                 placeholder="Informe o nome completo"
                 {...register("fullName")}
               />
-
-              {errors.fullName && (
-                <span className="text-red-500">{errors.fullName.message}</span>
-              )}
             </div>
 
             <div className="flex flex-col">
