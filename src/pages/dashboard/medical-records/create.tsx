@@ -6,9 +6,17 @@ import { useRouter } from "next/router";
 import Form from "./form";
 import { MedicalRecordProps } from "@/types/MedicalRecord";
 import { MEDICAL_RECORD_URL } from "@/utils/constants";
+import { useEffect, useState } from "react";
+
+export type userIdProps = {
+  userId: string;
+  name: string;
+};
 
 const Create: NextPage = () => {
   const router = useRouter();
+
+  const [userData, setUserData] = useState<userIdProps>();
 
   async function onSubmit(formValues: MedicalRecordProps) {
     const { userId } = router.query;
@@ -41,7 +49,36 @@ const Create: NextPage = () => {
     }
   }
 
-  return <Form onCreate={onSubmit} />;
+  useEffect(() => {
+    async function LoadUserData() {
+      if (!router.query.userId) {
+        return;
+      }
+
+      const response = await API.get(`/users/${router.query.userId}`).catch(
+        (err) => {
+          toast.error(err.message);
+        }
+      );
+
+      const data = response?.data;
+
+      if (response?.status === 200) {
+        const { id, name } = data;
+
+        const setData: userIdProps = {
+          userId: id,
+          name: name,
+        };
+
+        setUserData(setData);
+      }
+    }
+
+    LoadUserData();
+  }, [router.query.userId]);
+
+  return <Form onCreate={onSubmit} userData={userData} />;
 };
 
 export default Dashboard(Create);
