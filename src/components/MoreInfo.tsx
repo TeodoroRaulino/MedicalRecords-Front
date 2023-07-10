@@ -11,7 +11,7 @@ export default function MoreInfo({ medicalRecord }: Props) {
     <>
       {medicalRecord.id === id && (
         <div
-          className={`fixed inset-40 z-50 w-full h-full flex justify-center md:pt-10 ${
+          className={`fixed inset-0 sm:inset-40 z-50 w-full h-full flex justify-center md:pt-10 ${
             !isOpen && "hidden"
           }`}
         >
