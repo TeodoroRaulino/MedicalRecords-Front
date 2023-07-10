@@ -5,14 +5,10 @@ export type MedicalRecordProps = {
   phoneNumber: string;
   photo: File[];
   photoPath: string;
-  address?: Address;
+  street?: string;
+  neighborhood?: string;
+  city?: string;
+  state?: string;
+  postalCode?: string;
   userId?: number;
-};
-
-export type Address = {
-  street: string;
-  neighborhood: string;
-  city: string;
-  state: string;
-  postalCode: string;
 };

@@ -1,7 +1,7 @@
 import { Resolver, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { useEffect, useState } from "react";
-import { Address, MedicalRecordProps } from "@/types/MedicalRecord";
+import { MedicalRecordProps } from "@/types/MedicalRecord";
 import Button from "@/components/Button";
 import {
   CEP_VALIDATION_REGEX,
@@ -25,7 +25,11 @@ type MedicalRecordFormValues = {
   phoneNumber: string;
   photo: File[];
   photoPath: string;
-  address?: Address;
+  street?: string;
+  neighborhood?: string;
+  city?: string;
+  state?: string;
+  postalCode?: string;
 };
 
 type ResolverType = Resolver<MedicalRecordFormValues, any>;
@@ -58,55 +62,53 @@ const Form = ({ onCreate, onEdit, data, userData }: Props) => {
       ),
     photo: yup.mixed().required("Campo obrigatório"),
     photoPath: yup.string().notRequired(),
-    address: yup.object().shape({
-      street: yup
-        .string()
-        .transform((value, originalValue) => {
-          if (originalValue === "") {
-            return null;
-          }
+    street: yup
+      .string()
+      .transform((value, originalValue) => {
+        if (originalValue === "") {
+          return null;
+        }
+        return value;
+      })
+      .nullable(),
+    neighborhood: yup
+      .string()
+      .transform((value, originalValue) => {
+        if (originalValue === "") {
+          return null;
+        }
+        return value;
+      })
+      .nullable(),
+    city: yup
+      .string()
+      .transform((value, originalValue) => {
+        if (originalValue === "") {
+          return null;
+        }
+        return value;
+      })
+      .nullable(),
+    state: yup
+      .string()
+      .transform((value, originalValue) => {
+        if (originalValue === "") {
+          return null;
+        }
+        return value;
+      })
+      .nullable(),
+    postalCode: yup
+      .string()
+      .transform((value, originalValue) => {
+        if (originalValue !== "") {
           return value;
-        })
-        .nullable(),
-      neighborhood: yup
-        .string()
-        .transform((value, originalValue) => {
-          if (originalValue === "") {
-            return null;
-          }
-          return value;
-        })
-        .nullable(),
-      city: yup
-        .string()
-        .transform((value, originalValue) => {
-          if (originalValue === "") {
-            return null;
-          }
-          return value;
-        })
-        .nullable(),
-      state: yup
-        .string()
-        .transform((value, originalValue) => {
-          if (originalValue === "") {
-            return null;
-          }
-          return value;
-        })
-        .nullable(),
-      postalCode: yup
-        .string()
-        .transform((value, originalValue) => {
-          if (originalValue !== "") {
-            return value; // Mantém o valor não vazio para validação
-          } else {
-            return undefined; // Transforma o valor vazio para undefined
-          }
-        })
-        .matches(CEP_VALIDATION_REGEX, "CEP inválido")
-        .nullable(),
-    }),
+        } else {
+          return undefined;
+        }
+      })
+      .matches(CEP_VALIDATION_REGEX, "CEP inválido")
+      .nullable(),
   });
 
   const customResolver: ResolverType = yupResolver(
@@ -249,12 +251,10 @@ const Form = ({ onCreate, onEdit, data, userData }: Props) => {
                 className="border border-gray-300 p-2 rounded-lg"
                 type="text"
                 placeholder="Informe o endereço"
-                {...register("address.street")}
+                {...register("street")}
               />
-              {errors.address?.street && (
-                <span className="text-red-500">
-                  {errors.address.street.message}
-                </span>
+              {errors?.street && (
+                <span className="text-red-500">{errors.street.message}</span>
               )}
             </div>
 
@@ -266,11 +266,11 @@ const Form = ({ onCreate, onEdit, data, userData }: Props) => {
                 className="border border-gray-300 p-2 rounded-lg"
                 type="text"
                 placeholder="Informe o bairro"
-                {...register("address.neighborhood")}
+                {...register("neighborhood")}
               />
-              {errors.address?.neighborhood && (
+              {errors?.neighborhood && (
                 <span className="text-red-500">
-                  {errors.address.neighborhood.message}
+                  {errors.neighborhood.message}
                 </span>
               )}
             </div>
@@ -283,12 +283,10 @@ const Form = ({ onCreate, onEdit, data, userData }: Props) => {
                 className="border border-gray-300 p-2 rounded-lg"
                 type="text"
                 placeholder="Informe a cidade"
-                {...register("address.city")}
+                {...register("city")}
               />
-              {errors.address?.city && (
-                <span className="text-red-500">
-                  {errors.address.city.message}
-                </span>
+              {errors?.city && (
+                <span className="text-red-500">{errors.city.message}</span>
               )}
             </div>
 
@@ -300,12 +298,10 @@ const Form = ({ onCreate, onEdit, data, userData }: Props) => {
                 className="border border-gray-300 p-2 rounded-lg"
                 type="text"
                 placeholder="Informe o estado"
-                {...register("address.state")}
+                {...register("state")}
               />
-              {errors.address?.state && (
-                <span className="text-red-500">
-                  {errors.address.state.message}
-                </span>
+              {errors?.state && (
+                <span className="text-red-500">{errors.state.message}</span>
               )}
             </div>
 
@@ -316,12 +312,12 @@ const Form = ({ onCreate, onEdit, data, userData }: Props) => {
               <input
                 placeholder="Informe o CEP"
                 type="text"
-                {...register("address.postalCode")}
+                {...register("postalCode")}
                 className="border border-gray-300 p-2 rounded-lg"
               />
-              {errors.address?.postalCode && (
+              {errors?.postalCode && (
                 <span className="text-red-500">
-                  {errors.address.postalCode.message}
+                  {errors.postalCode.message}
                 </span>
               )}
             </div>
