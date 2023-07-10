@@ -66,7 +66,7 @@ const Index: NextPage = () => {
         </div>
 
         {roles[role] === DOCTOR_ROLE ? (
-          <div className="flex items-center justify-center text-teal-300">
+          <div className="flex items-center justify-center text-teal-300 pt-10">
             {isLoading ? (
               <SkeletonDashboard />
             ) : (
@@ -74,8 +74,8 @@ const Index: NextPage = () => {
                 <span className="text-4xl font-semibold text-white py-5 px-10">
                   Informações
                 </span>
-                <div className="flex flex-row justify-between px-10 py-5 gap-20">
-                  <div className="flex flex-col items-start bg-gray-700 p-7 rounded-lg w-1/3">
+                <div className="flex flex-col sm:flex-row justify-between px-10 py-5 gap-20">
+                  <div className="flex flex-col items-start bg-gray-700 p-7 rounded-lg sm:w-1/3">
                     <div className="flex flex-row items-center justify-between w-full">
                       <span className="text-5xl font-semibold pb-3">
                         {InfoDashboard?.totalMedicalRecords}
@@ -84,7 +84,7 @@ const Index: NextPage = () => {
                     </div>
                     <span className="text-lg font-semibold">Prontuários</span>
                   </div>
-                  <div className="flex flex-col items-start bg-gray-700 p-7 rounded-lg w-1/3">
+                  <div className="flex flex-col items-start bg-gray-700 p-7 rounded-lg sm:w-1/3">
                     <div className="flex flex-row items-center justify-between w-full">
                       <span className="text-5xl font-semibold pb-3">
                         {InfoDashboard?.totalPatients}
@@ -93,7 +93,7 @@ const Index: NextPage = () => {
                     </div>
                     <span className="text-lg font-semibold">Pacientes</span>
                   </div>
-                  <div className="flex flex-col items-start bg-gray-700 p-7 rounded-lg w-1/3">
+                  <div className="flex flex-col items-start bg-gray-700 p-7 rounded-lg sm:w-1/3">
                     <div className="flex flex-row items-center justify-between w-full">
                       <span className="text-5xl font-semibold pb-3">
                         {InfoDashboard?.totalDoctors}

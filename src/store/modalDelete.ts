@@ -7,8 +7,9 @@ type State = {
   isOpen: boolean;
   urlToAction: string;
   modalContent: string;
+  itemToDelete: string;
   response?: AxiosResponse<any>;
-  openModal: (url: string, content: string) => void;
+  openModal: (url: string, content: string, item: string) => void;
   closeModal: () => void;
   deleteAction: () => Promise<void>;
 };
@@ -17,6 +18,7 @@ const initialState = {
   isOpen: false,
   urlToAction: "",
   modalContent: "",
+  itemToDelete: "",
   response: undefined,
   openModal: () => {},
   closeModal: () => {},
@@ -25,11 +27,12 @@ const initialState = {
 
 export const useModalDeleteStore = create<State>((set, get) => ({
   ...initialState,
-  openModal: (url, content) => {
+  openModal: (url, content, itemToDelete) => {
     set({
       isOpen: true,
       urlToAction: url,
       modalContent: content,
+      itemToDelete: itemToDelete,
     });
   },
   closeModal: () => {
@@ -45,9 +48,12 @@ export const useModalDeleteStore = create<State>((set, get) => ({
       set({
         response: response,
       });
-      //window.location.reload();
-
       toast.success("Registro excluído com sucesso!");
+
+      //Todo: Solução temporária para atualizar a página após excluir um registro, pensar em outra forma de fazer isso.
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
 
       set({ isOpen: false });
     } catch (error) {

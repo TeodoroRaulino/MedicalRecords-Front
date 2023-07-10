@@ -169,7 +169,7 @@ const Form = ({ onCreate, onEdit, data, userData }: Props) => {
               <input
                 className="border border-gray-300 p-2 rounded-lg group-hover:opacity-100"
                 type="text"
-                disabled
+                readOnly
                 defaultValue={userData?.name}
                 placeholder="Informe o nome completo"
                 {...register("fullName")}
