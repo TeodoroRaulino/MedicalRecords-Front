@@ -33,6 +33,24 @@ export function Dashboard(Page: any) {
 
     const [menu, setMenu] = useState<MenuItem[]>([]);
 
+    const [isMobile, setIsMobile] = useState(false);
+
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    useEffect(() => {
+      const handleResize = () => {
+        setIsMobile(window.innerWidth <= 1024);
+      };
+
+      handleResize();
+
+      window.addEventListener("resize", handleResize);
+
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }, []);
+
     useEffect(() => {
       function renderMenuItems() {
         const items = [
@@ -123,14 +141,21 @@ export function Dashboard(Page: any) {
 
     return (
       <>
+        <div
+          onClick={() => setSidebarOpen(false)}
+          className={
+            (sidebarOpen ? "block" : "hidden") +
+            " fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"
+          }
+        ></div>
         <div className="flex h-screen bg-slate-200">
           <div
             className={
-              (sidebarIsOpen
+              (sidebarOpen
                 ? "translate-x-0 ease-out"
                 : "-translate-x-full ease-in") +
-              (sidebarIsOpen ? " w-48" : " w-16") +
-              " fixed inset-y-0 left-0 transition-all duration-300 overflow-hidden transform bg-gray-800 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0"
+              (sidebarIsOpen ? " lg:w-48" : " lg:w-16") +
+              " fixed z-50 inset-y-0 left-0 transition-all duration-300 overflow-hidden transform bg-gray-800 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0 w-48"
             }
           >
             <div className="flex flex-col items-center justify-center pt-8">
@@ -154,7 +179,11 @@ export function Dashboard(Page: any) {
             <header className="flex justify-between items-center z-20 py-4 px-6 bg-white shadow-lg">
               <div className="flex items-center justify-center">
                 <button
-                  onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
+                  onClick={
+                    isMobile
+                      ? () => setSidebarOpen(true)
+                      : () => setSidebarIsOpen(!sidebarIsOpen)
+                  }
                   className="text-gray-600 text-2xl font-semibold h-auto w-10"
                 >
                   <FaBars />

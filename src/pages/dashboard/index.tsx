@@ -57,10 +57,10 @@ const Index: NextPage = () => {
     <>
       <div className="flex flex-col min-h-screen p-10 bg-white">
         <div className="flex flex-col items-center justify-center">
-          <span className="text-6xl font-semibold text-gray-700">
+          <span className="text-5xl lg:text-6xl font-semibold text-gray-700">
             Olá{name ? `, ${name}` : ""}!
           </span>
-          <span className="text-4xl font-semibold text-gray-700 py-5">
+          <span className="text-center text-4xl font-semibold text-gray-700 py-5">
             Bem vindo ao sistema de prontuários.
           </span>
         </div>
