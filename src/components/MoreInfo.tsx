@@ -18,7 +18,7 @@ export default function MoreInfo({ medicalRecord }: Props) {
           <div className="flex items-end justify-center min-h-screen md:w-1/4 pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div
               onClick={() => close()}
-              className="fixed inset-0 transition-opacity"
+              className="fixed inset-0 transition-opacity bg-black opacity-75"
             ></div>
             <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
               <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">

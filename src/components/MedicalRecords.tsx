@@ -28,7 +28,8 @@ export default function MedicalRecord({ medicalRecord }: Props) {
   const handleDelete = () => {
     openModal(
       `/medical-records/${medicalRecord.id}`,
-      `Você tem certeza que quer deletar a ficha médica de ${medicalRecord.fullName}?`
+      "Você tem certeza que quer deletar a ficha médica de",
+      `${medicalRecord.fullName}`
     );
   };
 

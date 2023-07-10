@@ -26,7 +26,8 @@ export default function Users({ user }: UserProps) {
   const handleDeleteUser = () => {
     openModal(
       `/users/${user.id}`,
-      `Você tem certeza que quer deletar o usuário ${user.name}?`
+      "Você tem certeza que quer deletar o usuário",
+      `${user.name}`
     );
   };
 
