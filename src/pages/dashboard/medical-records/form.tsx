@@ -104,10 +104,10 @@ const Form = ({ onCreate, onEdit, data, userData }: Props) => {
         if (originalValue !== "") {
           return value;
         } else {
-          return undefined;
+          return null;
         }
       })
-      .matches(CEP_VALIDATION_REGEX, "CEP inválido")
+      .matches(CEP_VALIDATION_REGEX, "CEP inválido, o formato é 99999-999")
       .nullable(),
   });
 
