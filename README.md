@@ -11,9 +11,11 @@ A aplicação de Ficha Médica tem como objetivo fornecer uma plataforma para pa
 - Zustand
 
 ## Uso
-Para fazer nosso primeiro contato com a aplicação, ao rodar a migração no backend, irá criar um usuário default. Sendo assim, pode ser feito o login na aplicação com o usuários:
+Para fazer nosso primeiro contato com a aplicação, ao rodar a migração no backend, irá criar um usuário default. Sendo assim, pode ser feito o login na aplicação com o usuário:
 - email: teodoro@example.com
 - senha: 123456
+Esse usuário é um médico(admin), então segue as permissões de uso do usuário do tipo Médico.
+
 ### Usuário do tipo Médico
 - Acesso à aplicação para controle completo do CRUD de usuários e fichas médicas.
 - Interface intuitiva e de fácil utilização para o controle de usuários.
