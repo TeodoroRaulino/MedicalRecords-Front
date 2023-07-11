@@ -72,7 +72,7 @@ const Index: NextPage = () => {
                   />
                 )}
                 <div className="flex flex-col">
-                  <h1 className="text-5xl font-bold text-gray-500 pb-2">
+                  <h1 className="text-4xl font-bold text-gray-500 pb-2 text-ellipsis overflow-hidden whitespace-nowrap max-w-xs">
                     {medicalRecord?.fullName}
                   </h1>
                 </div>
@@ -81,12 +81,14 @@ const Index: NextPage = () => {
               <div className="flex flex-col text-xl gap-2">
                 <div className="flex flex-row bg-white rounded-lg w-full py-2 px-4">
                   <h1 className="font-bold text-gray-500">CPF:</h1>
-                  <h1 className="text-gray-500 pl-3">{medicalRecord?.cpf}</h1>
+                  <h1 className="text-gray-500 pl-3 text-ellipsis overflow-hidden whitespace-nowrap max-w-200">
+                    {medicalRecord?.cpf}
+                  </h1>
                 </div>
 
                 <div className="flex flex-row bg-white rounded-lg w-full py-2 px-4">
                   <h1 className="font-bold text-gray-500">Telefone: </h1>
-                  <h1 className="text-gray-500 pl-3">
+                  <h1 className="text-gray-500 pl-3 text-ellipsis overflow-hidden whitespace-nowrap max-w-200">
                     {medicalRecord?.phoneNumber}
                   </h1>
                 </div>
@@ -97,14 +99,14 @@ const Index: NextPage = () => {
 
                 <div className="flex flex-row bg-white rounded-lg w-full py-2 px-4">
                   <h1 className="font-bold text-gray-500">Rua:</h1>
-                  <h1 className="text-gray-500 pl-3">
+                  <h1 className="text-gray-500 pl-3 text-ellipsis overflow-hidden whitespace-nowrap max-w-200">
                     {medicalRecord?.street ? medicalRecord.street : "--"}
                   </h1>
                 </div>
 
                 <div className="flex flex-row bg-white rounded-lg w-full py-2 px-4">
-                  <h1 className="font-bold text-gray-500">Bairro</h1>
-                  <h1 className="text-gray-500 pl-3">
+                  <h1 className="font-bold text-gray-500">Bairro:</h1>
+                  <h1 className="text-gray-500 pl-3 text-ellipsis overflow-hidden whitespace-nowrap max-w-200">
                     {medicalRecord?.neighborhood
                       ? medicalRecord.neighborhood
                       : "--"}
@@ -113,21 +115,21 @@ const Index: NextPage = () => {
 
                 <div className="flex flex-row bg-white rounded-lg w-full py-2 px-4">
                   <h1 className="font-bold text-gray-500">Cidade:</h1>
-                  <h1 className="text-gray-500 pl-3">
+                  <h1 className="text-gray-500 pl-3 text-ellipsis overflow-hidden whitespace-nowrap max-w-200">
                     {medicalRecord?.city ? medicalRecord.city : "--"}
                   </h1>
                 </div>
 
                 <div className="flex flex-row bg-white rounded-lg w-full py-2 px-4">
                   <h1 className="font-bold text-gray-500">Estado:</h1>
-                  <h1 className="text-gray-500 pl-3">
+                  <h1 className="text-gray-500 pl-3 text-ellipsis overflow-hidden whitespace-nowrap max-w-200">
                     {medicalRecord?.state ? medicalRecord.state : "--"}
                   </h1>
                 </div>
 
                 <div className="flex flex-row bg-white rounded-lg w-full py-2 px-4">
                   <h1 className="font-bold text-gray-500">CEP:</h1>
-                  <h1 className="text-gray-500 pl-3">
+                  <h1 className="text-gray-500 pl-3 text-ellipsis overflow-hidden whitespace-nowrap max-w-200">
                     {medicalRecord?.postalCode
                       ? medicalRecord.postalCode
                       : "--"}
