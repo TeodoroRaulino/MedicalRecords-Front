@@ -48,14 +48,16 @@ const Index: NextPage = () => {
     <>
       <div className="w-full p-10 bg-white ">
         <div className="flex justify-between">
-          <h1 className="text-6xl text-gray-500 font-bold">Suas informações</h1>
+          <h1 className="text-4xl sm:text-6xl text-center sm:text-left text-gray-500 font-bold">
+            Suas informações
+          </h1>
         </div>
         <div className="flex flex-row flex-wrap justify-center mt-10">
           {isLoading ? (
             <div>carregando...</div>
           ) : (
-            <div className="flex flex-col bg-gray-100 rounded-xl shadow-lg w-2/4 p-10">
-              <div className="flex flex-row gap-10 items-center pb-5">
+            <div className="flex flex-col bg-gray-100 rounded-xl shadow-lg sm:w-2/4 p-10">
+              <div className="flex flex-col sm:flex-row gap-10 items-center pb-5">
                 {imageSrc ? (
                   <img
                     src={imageSrc}
@@ -70,7 +72,7 @@ const Index: NextPage = () => {
                   />
                 )}
                 <div className="flex flex-col">
-                  <h1 className="text-2xl font-bold text-gray-500">
+                  <h1 className="text-5xl font-bold text-gray-500 pb-2">
                     {medicalRecord?.fullName}
                   </h1>
                 </div>
@@ -96,31 +98,39 @@ const Index: NextPage = () => {
                 <div className="flex flex-row bg-white rounded-lg w-full py-2 px-4">
                   <h1 className="font-bold text-gray-500">Rua:</h1>
                   <h1 className="text-gray-500 pl-3">
-                    {medicalRecord?.street}
+                    {medicalRecord?.street ? medicalRecord.street : "--"}
                   </h1>
                 </div>
 
                 <div className="flex flex-row bg-white rounded-lg w-full py-2 px-4">
                   <h1 className="font-bold text-gray-500">Bairro</h1>
                   <h1 className="text-gray-500 pl-3">
-                    {medicalRecord?.neighborhood}
+                    {medicalRecord?.neighborhood
+                      ? medicalRecord.neighborhood
+                      : "--"}
                   </h1>
                 </div>
 
                 <div className="flex flex-row bg-white rounded-lg w-full py-2 px-4">
                   <h1 className="font-bold text-gray-500">Cidade:</h1>
-                  <h1 className="text-gray-500 pl-3">{medicalRecord?.city}</h1>
+                  <h1 className="text-gray-500 pl-3">
+                    {medicalRecord?.city ? medicalRecord.city : "--"}
+                  </h1>
                 </div>
 
                 <div className="flex flex-row bg-white rounded-lg w-full py-2 px-4">
                   <h1 className="font-bold text-gray-500">Estado:</h1>
-                  <h1 className="text-gray-500 pl-3">{medicalRecord?.state}</h1>
+                  <h1 className="text-gray-500 pl-3">
+                    {medicalRecord?.state ? medicalRecord.state : "--"}
+                  </h1>
                 </div>
 
                 <div className="flex flex-row bg-white rounded-lg w-full py-2 px-4">
                   <h1 className="font-bold text-gray-500">CEP:</h1>
                   <h1 className="text-gray-500 pl-3">
-                    {medicalRecord?.postalCode}
+                    {medicalRecord?.postalCode
+                      ? medicalRecord.postalCode
+                      : "--"}
                   </h1>
                 </div>
               </div>
