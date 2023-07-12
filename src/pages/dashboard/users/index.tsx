@@ -50,7 +50,7 @@ const Index: NextPage = () => {
     <>
       <div className="w-full p-10 bg-white">
         <div className="flex justify-between">
-          <h1 className="text-6xl text-gray-500 font-bold">Users</h1>
+          <h1 className="text-6xl text-gray-500 font-bold">Usuários</h1>
           <Link href="/dashboard/users/create">
             <button className="flex items-center justify-center w-32 h-12 bg-green-600 text-white rounded-md">
               Criar
