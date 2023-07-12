@@ -31,11 +31,22 @@ const Create: NextPage = () => {
     formData.append("photo", new Blob([photo], { type: "image/jpeg" }));
     formData.append("photoPath", formValues.photoPath);
     formData.append("userId", userId as string);
-    formData.append("street", formValues.street as string);
-    formData.append("neighborhood", formValues.neighborhood as string);
-    formData.append("city", formValues.city as string);
-    formData.append("state", formValues.state as string);
-    formData.append("postalCode", formValues.postalCode as string);
+    formData.append("photoPath", formValues.photoPath);
+    if (formValues.street !== null) {
+      formData.append("street", formValues.street as string);
+    }
+    if (formValues.neighborhood !== null) {
+      formData.append("neighborhood", formValues.neighborhood as string);
+    }
+    if (formValues.city !== null) {
+      formData.append("city", formValues.city as string);
+    }
+    if (formValues.state !== null) {
+      formData.append("state", formValues.state as string);
+    }
+    if (formValues.postalCode !== null) {
+      formData.append("postalCode", formValues.postalCode as string);
+    }
 
     const response = await API.post("/medical-records", formData, {
       headers: {

@@ -66,36 +66,35 @@ const Index: NextPage = () => {
         <div className="flex justify-between">
           <h1 className="text-6xl text-gray-500 font-bold">Prontuários</h1>
         </div>
-        <div className="flex flex-row flex-wrap mt-10">
-          <div className="flex flex-row justify-between mb-10 gap-5 text-black">
-            <select
-              value={searchType}
-              onChange={(e) => setSearchType(e.target.value as "name" | "cpf")}
+        <div className="flex flex-row my-10 gap-5 text-black">
+          <select
+            value={searchType}
+            onChange={(e) => setSearchType(e.target.value as "name" | "cpf")}
+            className="border border-gray-300 rounded-md p-2"
+          >
+            <option value="name">Nome</option>
+            <option value="cpf">CPF</option>
+          </select>
+          {searchType === "name" && (
+            <input
+              type="text"
+              placeholder="Filtrar por nome"
               className="border border-gray-300 rounded-md p-2"
-            >
-              <option value="name">Nome</option>
-              <option value="cpf">CPF</option>
-            </select>
-            {searchType === "name" && (
-              <input
-                type="text"
-                placeholder="Filtrar por nome"
-                className="border border-gray-300 rounded-md p-2"
-                value={searchValue}
-                onChange={(e) => setSearchValue(e.target.value)}
-              />
-            )}
-            {searchType === "cpf" && (
-              <input
-                type="text"
-                placeholder="Filtrar por CPF"
-                className="border border-gray-300 rounded-md p-2"
-                value={searchValue}
-                onChange={(e) => setSearchValue(e.target.value)}
-              />
-            )}
-          </div>
-
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+            />
+          )}
+          {searchType === "cpf" && (
+            <input
+              type="text"
+              placeholder="Filtrar por CPF"
+              className="border border-gray-300 rounded-md p-2"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+            />
+          )}
+        </div>
+        <div className="flex flex-row flex-wrap mt-10">
           {isLoading ? (
             <div>carregando...</div>
           ) : (

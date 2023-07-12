@@ -25,4 +25,4 @@ export const NAME_VALIDATION_REGEX = /^.{4,200}$/;
 export const CPF_VALIDATION_REGEX = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
 export const EMAIL_VALIDATION_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 export const CEP_VALIDATION_REGEX = /^\d{5}\-\d{3}$/;
-export const PHONE_VALIDATION_REGEX = /^\+[1-9]\d{1,14}$/;
+export const PHONE_VALIDATION_REGEX = /^\+\d{2} \d{2} \d{5}-\d{4}$/;

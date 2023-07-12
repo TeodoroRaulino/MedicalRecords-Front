@@ -11,6 +11,7 @@ import {
 } from "@/utils/constants";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { userIdProps } from "./create";
+import { mask } from "@/utils/mask";
 
 type Props = {
   onCreate?: (formValues: MedicalRecordProps) => Promise<void>;
@@ -58,7 +59,7 @@ const Form = ({ onCreate, onEdit, data, userData }: Props) => {
       .required("Campo obrigatório")
       .matches(
         PHONE_VALIDATION_REGEX,
-        "Telefone inválido, o formato é +5599999999999"
+        "Telefone inválido, o formato é +55 99 99999-9999"
       ),
     photo: yup.mixed().required("Campo obrigatório"),
     photoPath: yup.string().notRequired(),
@@ -185,7 +186,12 @@ const Form = ({ onCreate, onEdit, data, userData }: Props) => {
               <input
                 placeholder="Informe o CPF"
                 type="text"
-                {...register("cpf")}
+                {...register("cpf", {
+                  onChange: (e) => {
+                    const masked = mask(e.target.value, "cpf");
+                    e.target.value = masked;
+                  },
+                })}
                 className="border border-gray-300 p-2 rounded-lg"
               />
               {errors.cpf && (
@@ -200,7 +206,12 @@ const Form = ({ onCreate, onEdit, data, userData }: Props) => {
               <input
                 placeholder="Informe o telefone"
                 type="text"
-                {...register("phoneNumber")}
+                {...register("phoneNumber", {
+                  onChange: (e) => {
+                    const masked = mask(e.target.value, "phone");
+                    e.target.value = masked;
+                  },
+                })}
                 className="border border-gray-300 p-2 rounded-lg"
               />
               {errors.phoneNumber && (
@@ -312,7 +323,12 @@ const Form = ({ onCreate, onEdit, data, userData }: Props) => {
               <input
                 placeholder="Informe o CEP"
                 type="text"
-                {...register("postalCode")}
+                {...register("postalCode", {
+                  onChange: (e) => {
+                    const masked = mask(e.target.value, "cep");
+                    e.target.value = masked;
+                  },
+                })}
                 className="border border-gray-300 p-2 rounded-lg"
               />
               {errors?.postalCode && (
