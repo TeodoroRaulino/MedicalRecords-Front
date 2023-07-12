@@ -67,23 +67,35 @@ export default function Users({ user }: UserProps) {
         </p>
       </div>
       <div className="px-6 py-3 w-1/4">
-        <div className="flex flex-row items-center justify-start">
-          <Link href={`${EDIT_USER_URL}/${user.id}`}>
+        <div className="flex flex-row items-center justify-start relative">
+          <Link href={`${EDIT_USER_URL}/${user.id}`} className="group">
             <span className="flex items-center justify-center h-full w-10 text-gray-800">
               <FaEdit />
+            </span>
+            <span className="tooltip absolute top-0 left-[20%] 2xl:left-[15%] p-1 bg-gray-800 text-white text-xs rounded opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-100">
+              Editar usuário
             </span>
           </Link>
           <button
             onClick={handleDeleteUser}
-            className="flex items-center justify-center h-full w-10 text-red-600"
+            className="flex items-center justify-center h-full w-10 text-red-600 group"
           >
             <FaTrash />
+            <span className="tooltip absolute top-0 left-[35%] 2xl:left-[30%] p-1 bg-gray-800 text-white text-xs rounded opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-100">
+              Excluir usuário
+            </span>
           </button>
           {existesMedicalRecord === false &&
             roles[user.role] === PATIENT_ROLE && (
-              <Link href={CREATE_MEDICAL_RECORD_URL + `?userId=${user.id}`}>
+              <Link
+                href={CREATE_MEDICAL_RECORD_URL + `?userId=${user.id}`}
+                className="group"
+              >
                 <span className="flex items-center justify-center h-full w-10 text-gray-800">
                   {loading ? null : <FaClipboardList />}
+                </span>
+                <span className="tooltip absolute top-0 left-[55%] 2xl:left-[45%] p-1 bg-gray-800 text-white text-xs rounded opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-100">
+                  Criar prontuário
                 </span>
               </Link>
             )}
