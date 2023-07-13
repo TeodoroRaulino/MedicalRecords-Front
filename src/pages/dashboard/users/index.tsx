@@ -6,11 +6,24 @@ import { NextPage } from "next";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import Pagination, { paginate } from "@/components/Pagination";
 
 const Index: NextPage = () => {
   const [users, setUsers] = useState<User[]>([]);
+
   const [isLoading, setIsLoading] = useState(true);
+
   const [filter, setFilter] = useState("");
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const usersPerPage = 8;
+
+  const userPage = paginate(users, currentPage, usersPerPage);
+
+  const onPageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setFilter(event.target.value);
@@ -23,6 +36,8 @@ const Index: NextPage = () => {
       return user.role === parseInt(filter);
     }
   });
+
+  const userPageFiltered = paginate(filteredUsers, currentPage, usersPerPage);
 
   useEffect(() => {
     async function LoadUser() {
@@ -75,29 +90,51 @@ const Index: NextPage = () => {
               </select>
             </div>
 
-            <div className="flex flex-row font-medium text-gray-500 uppercase tracking-wider">
-              <div className="px-6 py-3 w-1/4">Name</div>
-              <div className="px-6 py-3 w-1/4">Email</div>
-              <div className="px-6 py-3 w-1/4">Cargo</div>
-              <div className="px-6 py-3 w-1/4">Ações</div>
+            <div className="w-full h-full overflow-x-auto">
+              <div className="min-w-[760px] md:min-w-full mx-auto">
+                <div className="flex flex-row font-medium text-gray-500 uppercase tracking-wider">
+                  <div className="px-6 py-3 w-1/4">Name</div>
+                  <div className="px-6 py-3 w-1/4">Email</div>
+                  <div className="px-6 py-3 w-1/4">Cargo</div>
+                  <div className="px-6 py-3 w-1/4">Ações</div>
+                </div>
+
+                {isLoading ? (
+                  <div>carregando...</div>
+                ) : (
+                  <div className="bg-white">
+                    {filter.length > 0
+                      ? userPageFiltered.map((user: User, index: number) => (
+                          <div
+                            key={index}
+                            className={`${
+                              index % 2 === 0 ? "bg-gray-50" : "bg-gray-200"
+                            } px-6 py-3 flex items-center`}
+                          >
+                            <Users user={user} />
+                          </div>
+                        ))
+                      : userPage.map((user: User, index: number) => (
+                          <div
+                            key={index}
+                            className={`${
+                              index % 2 === 0 ? "bg-gray-50" : "bg-gray-200"
+                            } px-6 py-3 flex items-center`}
+                          >
+                            <Users user={user} />
+                          </div>
+                        ))}
+                  </div>
+                )}
+              </div>
             </div>
 
-            {isLoading ? (
-              <div>carregando...</div>
-            ) : (
-              <div className="bg-white">
-                {filteredUsers.map((user: User, index) => (
-                  <div
-                    key={index}
-                    className={`${
-                      index % 2 === 0 ? "bg-gray-50" : "bg-gray-200"
-                    } px-6 py-3 flex items-center`}
-                  >
-                    <Users user={user} />
-                  </div>
-                ))}
-              </div>
-            )}
+            <Pagination
+              data={filter.length > 0 ? filter.length : users.length}
+              currentPage={currentPage}
+              pageSize={usersPerPage}
+              onPageChange={onPageChange}
+            />
           </div>
         </div>
       </div>

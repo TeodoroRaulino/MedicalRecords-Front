@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { MedicalRecordProps } from "@/types/MedicalRecord";
 import MoreInfo from "@/components/MoreInfo";
+import Pagination, { paginate } from "@/components/Pagination";
 
 const Index: NextPage = () => {
   const [medicalRecords, setMedicalRecords] = useState<MedicalRecordProps[]>(
@@ -21,6 +22,22 @@ const Index: NextPage = () => {
   const [searchType, setSearchType] = useState<"name" | "cpf">("name");
 
   const [searchValue, setSearchValue] = useState("");
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const PatientPerPage = 9;
+
+  const patientPage = paginate(medicalRecords, currentPage, PatientPerPage);
+
+  const patientPageFiltered = paginate(
+    filteredMedicalRecords,
+    currentPage,
+    PatientPerPage
+  );
+
+  const onPageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   useEffect(() => {
     async function LoadUser() {
@@ -56,7 +73,7 @@ const Index: NextPage = () => {
 
       return true;
     });
-
+    setCurrentPage(1);
     setFilteredMedicalRecords(filteredRecords);
   }, [medicalRecords, searchType, searchValue]);
 
@@ -100,10 +117,10 @@ const Index: NextPage = () => {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-10 bg-white max-w-screen-xl mx-auto">
               {filteredMedicalRecords.length > 0
-                ? filteredMedicalRecords.map(
-                    (medicalRecord: MedicalRecordProps, index) => (
+                ? patientPageFiltered.map(
+                    (medicalRecord: MedicalRecordProps) => (
                       <div
-                        key={index}
+                        key={medicalRecord.id}
                         className="flex flex-row font-medium text-gray-500 uppercase tracking-wider"
                       >
                         <MedicalRecord medicalRecord={medicalRecord} />
@@ -111,20 +128,28 @@ const Index: NextPage = () => {
                       </div>
                     )
                   )
-                : medicalRecords.map(
-                    (medicalRecord: MedicalRecordProps, index) => (
-                      <div
-                        key={index}
-                        className="flex flex-row font-medium text-gray-500 uppercase tracking-wider"
-                      >
-                        <MedicalRecord medicalRecord={medicalRecord} />
-                        <MoreInfo medicalRecord={medicalRecord} />
-                      </div>
-                    )
-                  )}
+                : patientPage.map((medicalRecord: MedicalRecordProps) => (
+                    <div
+                      key={medicalRecord.id}
+                      className="flex flex-row font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      <MedicalRecord medicalRecord={medicalRecord} />
+                      <MoreInfo medicalRecord={medicalRecord} />
+                    </div>
+                  ))}
             </div>
           )}
         </div>
+        <Pagination
+          data={
+            filteredMedicalRecords.length > 0
+              ? filteredMedicalRecords.length
+              : medicalRecords.length
+          }
+          currentPage={currentPage}
+          pageSize={PatientPerPage}
+          onPageChange={onPageChange}
+        />
       </div>
     </>
   );
